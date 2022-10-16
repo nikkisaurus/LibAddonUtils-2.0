@@ -6,8 +6,8 @@
 ## X-Category: Library
 
 ## X-Curse-Project-ID: 689021
-# ## X-WoWI-ID: 
-# ## X-Wago-ID: 
+## X-WoWI-ID: 26427
+## X-Wago-ID: LvNAz86o
 
 Libs\LibStub\LibStub.lua
 LibAddonUtils-2.0.lua
