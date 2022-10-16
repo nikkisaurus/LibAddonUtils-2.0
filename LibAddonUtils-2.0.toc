@@ -5,5 +5,9 @@
 ## Version: @project-version@
 ## X-Category: Library
 
+## X-Curse-Project-ID: 689021
+# ## X-WoWI-ID: 
+# ## X-Wago-ID: 
+
 Libs\LibStub\LibStub.lua
 LibAddonUtils-2.0.lua

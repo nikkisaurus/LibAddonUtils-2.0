@@ -33,11 +33,11 @@ function lib:CacheItem(itemID, callback, args)
 		return
 	end
 
-	if callback and type(callback) == "function" then
-		callback(true, itemID, unpack(args))
-	end
-
 	cache[itemID] = nil
+
+	if callback and type(callback) == "function" then
+		return callback(true, itemID, unpack(args))
+	end
 end
 
 lib.frame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
@@ -49,6 +49,14 @@ function lib.frame:GET_ITEM_INFO_RECEIVED(itemID, success)
 	end
 
 	lib:CacheItem(unpack(cache[itemID]))
+end
+
+function lib:Cache(Type, id, callback, args)
+	if Type == "item" then
+		lib:CacheItem(id, callback, args)
+	elseif Type == "currency" then
+		callback(true, id, unpack(args))
+	end
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Numbers
