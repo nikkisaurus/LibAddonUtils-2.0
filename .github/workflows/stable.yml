@@ -12,8 +12,6 @@ jobs:
     release:
         runs-on: ubuntu-latest
 
-        environment: deployment
-
         env:
             CF_API_KEY: ${{ secrets.CF_API_KEY }}
             # WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
