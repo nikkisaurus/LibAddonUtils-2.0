@@ -20,15 +20,30 @@ function lib:CacheItem(itemID, callback, args)
 	args = type(args) == "table" and args or {}
 	local itemName = GetItemInfo(itemID)
 	if invalid[itemID] then
+		cache[itemID] = nil
+		invalid[itemID] = nil
 		if callback and type(callback) == "function" then
 			callback(false, itemID, unpack(args))
 			return
 		end
-		cache[itemID] = nil
-		invalid[itemID] = nil
 	elseif not itemName then
-		if not cache[itemID] then
-			cache[itemID] = { itemID, callback, args }
+		local item
+		if tonumber(itemID) then
+			item = Item:CreateFromItemID(tonumber(itemID))
+		else
+			item = Item:CreateFromItemLink(itemID)
+		end
+
+		if not item:IsItemEmpty() then
+			item:ContinueOnItemLoad(function()
+				lib:CacheItem(itemID, callback, args)
+			end)
+		else
+			cache[itemID] = nil
+			if callback and type(callback) == "function" then
+				callback(false, itemID, unpack(args))
+				return
+			end
 		end
 		return
 	end
