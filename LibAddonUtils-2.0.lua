@@ -74,6 +74,14 @@ function lib:Cache(Type, id, callback, args)
 	end
 end
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Frames
+
+function lib:AddSpecialFrame(frame, frameName)
+	_G[frameName] = frame
+	tinsert(UISpecialFrames, frameName)
+	self[frameName] = frame
+end
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- Numbers
 
 local numSuffixes = {
